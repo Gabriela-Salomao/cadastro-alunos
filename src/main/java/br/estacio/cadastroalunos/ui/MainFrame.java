@@ -323,6 +323,7 @@ public class MainFrame extends javax.swing.JFrame {
             c.setCurso(input_curso.getText());
             c.setDtmatricula(input_dtmatricula.getText());
             c.setObservacoes(input_observacoes.getText());
+            c.setGenero((String) cb_genero.getSelectedItem());
             mf.update(c);
             
         input_nucontrato.setText("");
@@ -333,6 +334,7 @@ public class MainFrame extends javax.swing.JFrame {
         input_curso.setText("");
         input_dtmatricula.setText("");
         input_observacoes.setText("");
+        cb_genero.setSelectedIndex(0);
         
         readTable();
         }

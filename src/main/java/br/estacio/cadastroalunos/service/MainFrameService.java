@@ -86,7 +86,7 @@ public class MainFrameService {
     }
     
     public void update(Client c) {
-        Connection con = DataService.open();
+        Connection conn = DataService.open();
         PreparedStatement stmt = null;
         
         try {

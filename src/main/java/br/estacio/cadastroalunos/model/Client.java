@@ -1,5 +1,7 @@
 package br.estacio.cadastroalunos.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Gabi
