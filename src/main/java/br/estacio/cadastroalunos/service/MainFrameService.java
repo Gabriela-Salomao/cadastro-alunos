@@ -2,6 +2,7 @@ package br.estacio.cadastroalunos.service;
 
 import br.estacio.cadastroalunos.model.Client;
 import static br.estacio.cadastroalunos.service.DataService.conn;
+import br.estacio.cadastroalunos.ui.MainFrame;
 import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,8 +26,8 @@ public class MainFrameService {
         PreparedStatement stmt = null;
         
         try{
-            stmt = conn.prepareStatement("INSERT INTO alunos (nucontrato,nome,dtnascimento,rg,cpf,curso,dtmatricula,observacoes,genero,foto) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO alunos (nucontrato,nome,dtnascimento,rg,cpf,curso,dtmatricula,observacoes,genero) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?)");
             stmt.setInt(1, c.getNucontrato());
             stmt.setString(2, c.getNome());
             stmt.setString(3, c.getDtnascimento());
@@ -36,7 +37,7 @@ public class MainFrameService {
             stmt.setString(7, c.getDtmatricula());
             stmt.setString(8, c.getObservacoes());
             stmt.setString(9, c.getGenero());
-            stmt.setString(10, c.getFoto());
+            //stmt.setString(9, c.getFoto());
             
             stmt.executeUpdate();
             
@@ -54,7 +55,7 @@ public class MainFrameService {
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("DELETE FROM aluno WHERE nucontrato = ?");
+            stmt = conn.prepareStatement("DELETE FROM alunos WHERE nucontrato = ?");
             stmt.setInt(1, c.getNucontrato());
             
             stmt.executeUpdate();
@@ -91,7 +92,7 @@ public class MainFrameService {
         try {
             
             stmt = conn.prepareStatement(
-                    "UPDATE alunos SET nome = ?,dtnascimento = ?,rg = ?,cpf = ?,curso = ?,dtmatricula = ?,observacoes = ?,genero = ?,foto = ? WHERE nucontrato = ?"
+                    "UPDATE alunos SET nome = ?,dtnascimento = ?,rg = ?,cpf = ?,curso = ?,dtmatricula = ?,observacoes = ?,genero = ? WHERE nucontrato = ?"
             );
             stmt.setInt(1, c.getNucontrato());
             stmt.setString(2, c.getNome());
@@ -102,7 +103,6 @@ public class MainFrameService {
             stmt.setString(7, c.getDtmatricula());
             stmt.setString(8, c.getObservacoes());
             stmt.setString(9, c.getGenero());
-            stmt.setString(10, c.getFoto());
             
             stmt.executeUpdate();
             
