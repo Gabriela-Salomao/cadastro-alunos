@@ -188,4 +188,79 @@ public class MainFrameService {
         
         return alunos;
     }
+    
+        public ArrayList<Client> readForContrato(String contrato) {
+        Connection conn = DataService.open();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        ArrayList<Client> alunos = new ArrayList<>();
+        
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM alunos WHERE nucontrato LIKE ?");
+            stmt.setString(1,"%"+contrato+"%");
+            
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Client c = new Client();
+                
+                c.setNucontrato(rs.getInt("nucontrato"));
+                c.setNome(rs.getString("nome"));
+                c.setDtnascimento(rs.getString("dtnascimento"));
+                c.setRg(rs.getString("rg"));
+                c.setCpf(rs.getString("cpf"));
+                c.setCurso(rs.getString("curso"));
+                c.setDtmatricula(rs.getString("dtmatricula"));
+                c.setObservacoes(rs.getString("observacoes"));
+                c.setGenero(rs.getString("genero"));
+                c.setFoto(rs.getString("Foto"));
+                alunos.add(c);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(MainFrameService.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DataService.close();
+        }
+         return alunos;
+        }
+        
+        public ArrayList<Client> readForCpf(String cpf) {
+        Connection conn = DataService.open();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        ArrayList<Client> alunos = new ArrayList<>();
+        
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM alunos WHERE cpf LIKE ?");
+            stmt.setString(1,"%"+cpf+"%");
+            
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Client c = new Client();
+                
+                c.setNucontrato(rs.getInt("nucontrato"));
+                c.setNome(rs.getString("nome"));
+                c.setDtnascimento(rs.getString("dtnascimento"));
+                c.setRg(rs.getString("rg"));
+                c.setCpf(rs.getString("cpf"));
+                c.setCurso(rs.getString("curso"));
+                c.setDtmatricula(rs.getString("dtmatricula"));
+                c.setObservacoes(rs.getString("observacoes"));
+                c.setGenero(rs.getString("genero"));
+                c.setFoto(rs.getString("Foto"));
+                alunos.add(c);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(MainFrameService.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DataService.close();
+        }
+        
+        return alunos;
+    }
 }

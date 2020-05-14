@@ -64,6 +64,32 @@ public class MainFrame extends javax.swing.JFrame {
                 c.getObservacoes() 
             });
         }
+        
+        for (Client c : mf.readForCpf(desc)) {
+            modelo.addRow(new Object[]{
+                c.getNucontrato(),
+                c.getNome(),
+                c.getDtnascimento(),
+                c.getRg(),
+                c.getCpf(),
+                c.getCurso(),
+                c.getDtmatricula(),
+                c.getObservacoes() 
+            });
+        }
+        
+        for (Client c : mf.readForContrato(desc)) {
+            modelo.addRow(new Object[]{
+                c.getNucontrato(),
+                c.getNome(),
+                c.getDtnascimento(),
+                c.getRg(),
+                c.getCpf(),
+                c.getCurso(),
+                c.getDtmatricula(),
+                c.getObservacoes() 
+            });
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -105,8 +131,15 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollBar1 = new javax.swing.JScrollBar();
         jScrollBar2 = new javax.swing.JScrollBar();
         jScrollBar3 = new javax.swing.JScrollBar();
-        input_pesquisar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        input_pesqNome = new javax.swing.JTextField();
+        btn_pesqNome = new javax.swing.JButton();
+        input_pesqCpf = new javax.swing.JTextField();
+        btn_pesqCpf = new javax.swing.JButton();
+        input_pesqContrato = new javax.swing.JTextField();
+        btn_pesqContrato = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -191,49 +224,64 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("Pesquisar por nome:");
+
+        jLabel11.setText("Pesquisar por CPF:");
+
+        jLabel12.setText("Pesquisar por N° contrato:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(input_nucontrato)
-                            .addComponent(input_nome)
-                            .addComponent(input_rg)
-                            .addComponent(input_cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
-                        .addGap(57, 57, 57)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(input_dtnascimento)
-                                    .addComponent(cb_genero, 0, 149, Short.MAX_VALUE)
-                                    .addComponent(input_curso)
-                                    .addComponent(input_dtmatricula)))
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_cadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_limpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel9)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(22, Short.MAX_VALUE))
+                                    .addComponent(input_nucontrato)
+                                    .addComponent(input_nome)
+                                    .addComponent(input_rg)
+                                    .addComponent(input_cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
+                                .addGap(57, 57, 57)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(input_dtnascimento)
+                                            .addComponent(cb_genero, 0, 149, Short.MAX_VALUE)
+                                            .addComponent(input_curso)
+                                            .addComponent(input_dtmatricula)))
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_cadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_limpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel9)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(126, 126, 126)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addGap(86, 86, 86))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,13 +322,31 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)))
         );
 
-        jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_pesqNome.setText("...");
+        btn_pesqNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_pesqNomeActionPerformed(evt);
+            }
+        });
+
+        btn_pesqCpf.setText("...");
+        btn_pesqCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pesqCpfActionPerformed(evt);
+            }
+        });
+
+        btn_pesqContrato.setText("jButton2");
+        btn_pesqContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pesqContratoActionPerformed(evt);
             }
         });
 
@@ -288,13 +354,23 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(input_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(input_pesqNome, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btn_pesqNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(input_pesqCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_pesqCpf)
+                .addGap(31, 31, 31)
+                .addComponent(input_pesqContrato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_pesqContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,9 +378,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(input_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_pesqContrato)
+                    .addComponent(btn_pesqCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(input_pesqCpf)
+                    .addComponent(input_pesqNome)
+                    .addComponent(btn_pesqNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(input_pesqContrato))
+                .addContainerGap())
         );
 
         pack();
@@ -405,9 +485,17 @@ public class MainFrame extends javax.swing.JFrame {
         this.cb_genero.setSelectedIndex(0);
     }//GEN-LAST:event_btn_limparActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        readJTableForDesc(input_pesquisar.getText());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btn_pesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pesqNomeActionPerformed
+        readJTableForDesc(input_pesqNome.getText());
+    }//GEN-LAST:event_btn_pesqNomeActionPerformed
+
+    private void btn_pesqCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pesqCpfActionPerformed
+        readJTableForDesc(input_pesqCpf.getText());
+    }//GEN-LAST:event_btn_pesqCpfActionPerformed
+
+    private void btn_pesqContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pesqContratoActionPerformed
+        readJTableForDesc(input_pesqContrato.getText());
+    }//GEN-LAST:event_btn_pesqContratoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,6 +513,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_cadastrar;
     private javax.swing.JButton btn_excluir;
     private javax.swing.JButton btn_limpar;
+    private javax.swing.JButton btn_pesqContrato;
+    private javax.swing.JButton btn_pesqCpf;
+    private javax.swing.JButton btn_pesqNome;
     private javax.swing.JComboBox<String> cb_genero;
     private javax.swing.JTextField input_cpf;
     private javax.swing.JTextField input_curso;
@@ -433,10 +524,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField input_nome;
     private javax.swing.JTextField input_nucontrato;
     private javax.swing.JTextArea input_observacoes;
-    private javax.swing.JTextField input_pesquisar;
+    private javax.swing.JTextField input_pesqContrato;
+    private javax.swing.JTextField input_pesqCpf;
+    private javax.swing.JTextField input_pesqNome;
     private javax.swing.JTextField input_rg;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
